@@ -1,0 +1,25 @@
+name: Print Software Versions
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  PrintClientAndServerSoftwareVersions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Operating System (Client)
+        run: uname -a  # Виводить версію ОС
+
+      - name: Print Web Navigator (Angular)
+        run: npx @angular/cli version  # Виводить версію Angular (як приклад веб-навігатора)
+
+      - name: Print Node.js Version (Server 1)
+        run: node --version  # Виводить версію Node.js
+
+  PrintDatabaseServerVersion:
+    runs-on: ubuntu-latest
+    needs: [PrintClientAndServerSoftwareVersions]
+    steps:
+      - name: Print PostgreSQL Version
+        run: psql --version  # Виводить версію PostgreSQL
